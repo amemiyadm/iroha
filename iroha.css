@@ -1,0 +1,9 @@
+.iroha-panel {
+    overflow: hidden;
+    transition: max-height .4s ease-in-out;
+    max-height: 0px;
+}
+
+.iroha-panel[data-iroha-is-open="true"] {
+    max-height: none;
+}
