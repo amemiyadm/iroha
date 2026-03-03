@@ -1,4 +1,4 @@
-class Iroha {
+export class Iroha {
     static delegate(root = document) {
         root.addEventListener('click', (e) => {
             const trigger = e.target.closest('.iroha-trigger');
