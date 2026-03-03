@@ -26,14 +26,11 @@ export class Iroha {
         if (!panel) return;
 
         if (panel.dataset.irohaIsOpen === 'true') {
-            panel.dataset.irohaIsOpen = 'false';
-
             panel.style.maxHeight = panel.scrollHeight + 'px';
             panel.offsetHeight;
             panel.style.maxHeight = '0px';
+            panel.dataset.irohaIsOpen = 'false';
         } else {
-            panel.dataset.irohaIsOpen = 'true';
-
             const parent = panel.parentElement?.closest('.iroha-panel');
             if (parent) {
                 parent.style.maxHeight = 'none';
@@ -52,6 +49,7 @@ export class Iroha {
 
                 panel.removeEventListener('transitionend', handler);
             });
+            panel.dataset.irohaIsOpen = 'true';
         }
     }
 }
