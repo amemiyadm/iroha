@@ -29,7 +29,6 @@ export class Iroha {
             panel.style.maxHeight = panel.scrollHeight + 'px';
             panel.offsetHeight;
             panel.style.maxHeight = '0px';
-
             panel.dataset.irohaIsOpen = 'false';
         } else {
             const parent = panel.parentElement?.closest('.iroha-panel');
@@ -40,6 +39,7 @@ export class Iroha {
             panel.style.maxHeight = '0px';
             panel.offsetHeight;
             panel.style.maxHeight = panel.scrollHeight + 'px';
+            panel.dataset.irohaIsOpen = 'true';
 
             panel.addEventListener('transitionend', function handler(e) {
                 if (e.propertyName !== 'max-height') return;
@@ -50,8 +50,6 @@ export class Iroha {
 
                 panel.removeEventListener('transitionend', handler);
             });
-
-            panel.dataset.irohaIsOpen = 'true';
         }
     }
 }
