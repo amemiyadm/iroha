@@ -2,6 +2,7 @@ export class Iroha {
     static delegate(root = document) {
         root.addEventListener('click', (e) => {
             const trigger = e.target.closest('.iroha-trigger');
+
             if (trigger) {
                 this.toggle(trigger);
             }
@@ -9,9 +10,7 @@ export class Iroha {
     }
 
     static attach(trigger) {
-        trigger.addEventListener('click', () => {
-            this.toggle(trigger);
-        });
+        trigger.addEventListener('click', () => this.toggle(trigger));
     }
 
     static attachAll() {
@@ -22,29 +21,18 @@ export class Iroha {
 
     static toggle(trigger) {
         const panel = document.getElementById(trigger.dataset.irohaTargetId);
+        const isOpen = panel.dataset.irohaIsOpen === 'true';
 
-        if (!panel) return;
+        panel.style.maxHeight = isOpen ? panel.scrollHeight + 'px' : '0';
+        panel.offsetHeight;
+        panel.style.maxHeight = isOpen ? '0' : panel.scrollHeight + 'px';
+        panel.dataset.irohaIsOpen = String(!isOpen);
 
-        if (panel.dataset.irohaIsOpen === 'true') {
-            panel.style.maxHeight = panel.scrollHeight + 'px';
-            panel.offsetHeight;
-            panel.style.maxHeight = '0px';
-            panel.dataset.irohaIsOpen = 'false';
-        } else {
-            const parent = panel.parentElement?.closest('.iroha-panel');
-            if (parent) {
-                parent.style.maxHeight = 'none';
-            }
-
-            panel.style.maxHeight = '0px';
-            panel.offsetHeight;
-            panel.style.maxHeight = panel.scrollHeight + 'px';
-            panel.dataset.irohaIsOpen = 'true';
-
+        if (!isOpen) {
             panel.addEventListener('transitionend', function handler(e) {
                 if (e.propertyName !== 'max-height') return;
 
-                if (panel.dataset.irohaIsOpen === 'true') {
+                if (isOpen) {
                     panel.style.maxHeight = 'none';
                 }
 
