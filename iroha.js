@@ -21,7 +21,7 @@ export class Iroha {
 
     static toggle(trigger) {
         const panel = document.getElementById(trigger.dataset.irohaTargetId);
-        const isOpen = panel.dataset.irohaIsOpen === 'true';
+        const isOpen = (panel.dataset.irohaIsOpen === 'true');
 
         panel.style.maxHeight = isOpen ? panel.scrollHeight + 'px' : '0';
         panel.offsetHeight;
@@ -32,7 +32,7 @@ export class Iroha {
             panel.addEventListener('transitionend', function handler(e) {
                 if (e.propertyName !== 'max-height') return;
 
-                if (isOpen) {
+                if (panel.dataset.irohaIsOpen === 'true') {
                     panel.style.maxHeight = 'none';
                 }
 
